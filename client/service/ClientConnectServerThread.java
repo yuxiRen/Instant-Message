@@ -21,7 +21,6 @@ public class ClientConnectServerThread extends Thread {
                 e.printStackTrace();
             }
         }
-        super.run();
     }
 
     public Socket getSocket() {
