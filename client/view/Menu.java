@@ -1,10 +1,12 @@
 package client.view;
 
+import client.service.ClientService;
 import util.Utility;
 
 public class Menu {
     private boolean loop = true;
     private String userInput = "";
+    private ClientService userClient = new ClientService();
 
     public static void main(String[] args) {
         new Menu().menu();
@@ -24,7 +26,7 @@ public class Menu {
                     String id = Utility.readString(50);
                     System.out.println("Enter your password: ");
                     String pwd = Utility.readString(50);
-                    if (true) {
+                    if (userClient.checkUser(id, pwd)) {
                         System.out.println("========Welcome " + id + "========");
                         while (loop) {
                             System.out.println("========" + id + "'s message window========");
