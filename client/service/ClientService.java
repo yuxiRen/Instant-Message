@@ -11,6 +11,7 @@ import client.common.User;
 public class ClientService {
     private User user = new User();
     private Socket socket;
+    private ClientConnectServerThread ccst;
 
     public boolean checkUser(String userId, String password) {
         // create user
@@ -27,6 +28,9 @@ public class ClientService {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             Message message = (Message) ois.readObject();
             if (message.getType().equals(MessageType.LOGIN_SUCCEED)) {
+                ClientConnectServerThread clientConnectServerThread =
+                        new ClientConnectServerThread(socket);
+                clientConnectServerThread.start();
                 return true;
             } else {
                 return false;
