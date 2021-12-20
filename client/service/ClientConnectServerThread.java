@@ -1,8 +1,8 @@
-package client.service;
+package service;
 
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import client.common.Message;
+import common.Message;
 
 public class ClientConnectServerThread extends Thread {
     private Socket socket;

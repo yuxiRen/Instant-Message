@@ -1,4 +1,4 @@
-package client.service;
+package service;
 
 import java.util.HashMap;
 

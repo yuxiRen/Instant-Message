@@ -1,12 +1,12 @@
-package client.service;
+package service;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import client.common.Message;
-import client.common.MessageType;
-import client.common.User;
+import common.Message;
+import common.MessageType;
+import common.User;
 
 public class ClientService {
     private User user = new User();

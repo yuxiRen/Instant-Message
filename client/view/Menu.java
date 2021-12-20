@@ -1,7 +1,7 @@
-package client.view;
+package view;
 
-import client.service.ClientService;
-import client.util.Utility;
+import service.ClientService;
+import util.Utility;
 
 public class Menu {
     private boolean loop = true;
