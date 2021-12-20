@@ -1,7 +1,7 @@
 package client.view;
 
 import client.service.ClientService;
-import util.Utility;
+import client.util.Utility;
 
 public class Menu {
     private boolean loop = true;
