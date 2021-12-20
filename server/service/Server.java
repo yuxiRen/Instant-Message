@@ -1,5 +1,6 @@
 package server.service;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -9,7 +10,7 @@ import client.common.MessageType;
 import client.common.User;
 
 public class Server {
-    private ServerSocket socket = null;
+    private ServerSocket socket = null;// wait for incoming client connection request
 
     public Server() {
         try {
@@ -37,7 +38,11 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            socket.close();
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

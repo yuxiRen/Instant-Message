@@ -17,6 +17,7 @@ public class ServerConnectClientThread extends Thread {
     public void run() {
         while (true) {
             try {
+                System.out.println("Server connects to Client " + userId);
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) ois.readObject();
             } catch (Exception e) {
