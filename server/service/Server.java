@@ -5,16 +5,33 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import common.Message;
 import common.MessageType;
 import common.User;
 
 public class Server {
     private ServerSocket socket = null;// wait for incoming client connection request
+    private static HashMap<String, User> dataBase = new HashMap<>();
+    static {
+        dataBase.put("100", new User("100", "123456"));
+        dataBase.put("200", new User("200", "223456"));
+        dataBase.put("300", new User("300", "323456"));
+        dataBase.put("400", new User("400", "423456"));
+        dataBase.put("500", new User("500", "523456"));
+    }
+
+    private boolean checkUser(String userId, String password) {
+        if (dataBase.containsKey(userId)) {
+            return dataBase.get(userId).getPassword().equals(password);
+        } else {
+            return false;
+        }
+    }
 
     public Server() {
         try {
-            System.out.println("服务端在9999端口监听...");
+            System.out.println("Server listens port 9999...");
             socket = new ServerSocket(9999);
             while (true) {
                 Socket s = socket.accept();
@@ -22,10 +39,9 @@ public class Server {
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 
                 User user = (User) ois.readObject();
-                System.out.println("********");
                 Message message = new Message();
 
-                if (user.getUserId().equals("100") && user.getPassword().equals("123456")) {
+                if (checkUser(user.getUserId(), user.getPassword())) {
                     message.setType(MessageType.LOGIN_SUCCEED);
                     oos.writeObject(message);
                     // create a thread to communicate with client
