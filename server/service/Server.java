@@ -19,7 +19,7 @@ public class Server {
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 User user = (User) ois.readObject();
                 Message message = new Message();
-                ObjectOutputStream oos = new ObjectOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 if (user.getUserId().equals("100") && user.getPassword().equals("123456")) {
                     message.setType(MessageType.LOGIN_SUCCEED);
                     oos.writeObject(message);
@@ -31,10 +31,13 @@ public class Server {
                 } else {
                     message.setType(MessageType.LOGIN_FAILED);
                     oos.writeObject(message);
+                    s.close();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            socket.close();
         }
     }
 }
