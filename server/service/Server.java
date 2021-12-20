@@ -27,13 +27,14 @@ public class Server {
                     ServerConnectClientThread sct =
                             new ServerConnectClientThread(s, user.getUserId());
                     sct.start();
+                    ManageServerConnectClientThread.addThread(user.getUserId(), sct);
                 } else {
                     message.setType(MessageType.LOGIN_FAILED);
+                    oos.writeObject(message);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
