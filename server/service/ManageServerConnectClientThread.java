@@ -20,4 +20,8 @@ public class ManageServerConnectClientThread {
         }
         return sb.toString();
     }
+
+    public static void delete(String userId) {
+        map.remove(userId);
+    }
 }

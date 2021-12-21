@@ -31,6 +31,11 @@ public class ServerConnectClientThread extends Thread {
                     userListMessage.setReceiver(message.getSender());
                     ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                     oos.writeObject(userListMessage);
+                } else if (message.getType().equals(MessageType.CLIENT_EXIT)) {
+                    System.out.println(message.getSender() + " logout");
+                    ManageServerConnectClientThread.delete(userId);
+                    socket.close();
+                    break;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
