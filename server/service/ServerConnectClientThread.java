@@ -3,6 +3,8 @@ package service;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Set;
 import common.Message;
 import common.MessageType;
 
@@ -46,6 +48,19 @@ public class ServerConnectClientThread extends Thread {
                     ObjectOutputStream oos =
                             new ObjectOutputStream(thread.getSocket().getOutputStream());
                     oos.writeObject(message);
+                } else if (message.getType().equals(MessageType.GROUP_MESSAGE)) {
+                    HashMap<String, ServerConnectClientThread> map =
+                            ManageServerConnectClientThread.getMap();
+                    Set<String> ids = map.keySet();
+                    for (String id : ids) {
+                        if (!id.equals(message.getSender())) {
+                            ServerConnectClientThread thread =
+                                    ManageServerConnectClientThread.getThread(id);
+                            ObjectOutputStream oos =
+                                    new ObjectOutputStream(thread.getSocket().getOutputStream());
+                            oos.writeObject(message);
+                        }
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

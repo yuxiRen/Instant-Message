@@ -24,4 +24,8 @@ public class ManageServerConnectClientThread {
     public static void delete(String userId) {
         map.remove(userId);
     }
+
+    public static HashMap<String, ServerConnectClientThread> getMap() {
+        return map;
+    }
 }
