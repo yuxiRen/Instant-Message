@@ -8,4 +8,5 @@ public interface MessageType {
     String RETURN_ONLINE_USERS = "5";
     String CLIENT_EXIT = "6";
     String GROUP_MESSAGE = "7";
+    String FILE_MESSAGE = "8";
 }

@@ -8,6 +8,43 @@ public class Message implements Serializable {
     private String receiver;
     private String content;
     private String sendTime;
+    private String type;
+    private byte[] fileArrays;
+    private int fileLength = 0;
+    private String fileDestination;
+    private String fileSource;
+
+    public byte[] getFileArrays() {
+        return fileArrays;
+    }
+
+    public void setFileArrays(byte[] fileArrays) {
+        this.fileArrays = fileArrays;
+    }
+
+    public int getFileLength() {
+        return fileLength;
+    }
+
+    public void setFileLength(int fileLength) {
+        this.fileLength = fileLength;
+    }
+
+    public String getFileDestination() {
+        return fileDestination;
+    }
+
+    public void setFileDestination(String fileDestination) {
+        this.fileDestination = fileDestination;
+    }
+
+    public String getFileSource() {
+        return fileSource;
+    }
+
+    public void setFileSource(String fileSource) {
+        this.fileSource = fileSource;
+    }
 
     public String getType() {
         return type;
@@ -17,7 +54,7 @@ public class Message implements Serializable {
         this.type = type;
     }
 
-    private String type;
+
 
     public String getSender() {
         return sender;
@@ -50,5 +87,4 @@ public class Message implements Serializable {
     public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
     }
-
 }
