@@ -24,7 +24,8 @@ public class ClientConnectServerThread extends Thread {
                     for (int i = 0; i < onlineUsers.length; i++) {
                         System.out.println("User: " + onlineUsers[i]);
                     }
-                } else if (message.getType().equals(MessageType.COMMON_MESSAGE)) {
+                } else if (message.getType().equals(MessageType.COMMON_MESSAGE)
+                        || message.getType().equals(MessageType.GROUP_MESSAGE)) {
                     System.out.println("\n" + message.getSendTime() + "\t" + message.getSender()
                             + " says: " + message.getContent());
                 }

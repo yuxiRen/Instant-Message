@@ -34,7 +34,6 @@ public class Communication {
         message.setContent(content);
         message.setSender(senderId);
         message.setSendTime(new Date().toString());
-        System.out.println(senderId + " says: ");
         try {
             ClientConnectServerThread thread = ManageClientConnectServerThread.getThread(senderId);
             ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
