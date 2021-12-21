@@ -2,6 +2,8 @@ package service;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import common.Message;
 import common.MessageType;
@@ -13,7 +15,9 @@ public class Communication {
         message.setContent(content);
         message.setSender(senderId);
         message.setReceiver(receiverId);
-        message.setSendTime(new Date().toString());
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime myDateObj = LocalDateTime.now();
+        message.setSendTime(myDateObj.format(myFormatObj));
         System.out.println(senderId + " says to " + receiverId + ": ");
         try {
             ClientConnectServerThread thread = ManageClientConnectServerThread.getThread(senderId);
