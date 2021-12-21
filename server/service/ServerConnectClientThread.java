@@ -15,6 +15,10 @@ public class ServerConnectClientThread extends Thread {
         this.userId = userId;
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     @Override
     public void run() {
         while (true) {
@@ -36,6 +40,12 @@ public class ServerConnectClientThread extends Thread {
                     ManageServerConnectClientThread.delete(userId);
                     socket.close();
                     break;
+                } else if (message.getType().equals(MessageType.COMMON_MESSAGE)) {
+                    ServerConnectClientThread thread =
+                            ManageServerConnectClientThread.getThread(message.getReceiver());
+                    ObjectOutputStream oos =
+                            new ObjectOutputStream(thread.getSocket().getOutputStream());
+                    oos.writeObject(message);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
