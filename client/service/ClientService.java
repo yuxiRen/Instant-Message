@@ -1,5 +1,6 @@
 package service;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -41,5 +42,19 @@ public class ClientService {
             e.printStackTrace();
         }
         return loginSucceeded;
+    }
+
+    // ask Server for online friends list
+    public void onlineUsersList() {
+        Message message = new Message();
+        message.setType(MessageType.GET_ONLINE_USERS);
+        try {
+            ClientConnectServerThread thread =
+                    ManageClientConnectServerThread.getThread(user.getUserId());
+            ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
+            oos.writeObject(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

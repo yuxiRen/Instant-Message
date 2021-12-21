@@ -3,6 +3,7 @@ package service;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import common.Message;
+import common.MessageType;
 
 public class ClientConnectServerThread extends Thread {
     private Socket socket;
@@ -17,6 +18,13 @@ public class ClientConnectServerThread extends Thread {
             try {
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) ois.readObject();
+                if (message.getType().equals(MessageType.RETURN_ONLINE_FRIENDS)) {
+                    String[] onlineUsers = message.getContent().split(" ");
+                    System.out.println("============Online Users==============");
+                    for (int i = 0; i < onlineUsers.length; i++) {
+                        System.out.println("User: " + onlineUsers[i]);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
