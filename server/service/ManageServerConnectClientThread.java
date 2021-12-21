@@ -12,4 +12,12 @@ public class ManageServerConnectClientThread {
     public static ServerConnectClientThread getThread(String userId) {
         return map.get(userId);
     }
+
+    public static String getOnlineUserList() {
+        StringBuilder sb = new StringBuilder();
+        for (String userId : map.keySet()) {
+            sb.append(userId).append(" ");
+        }
+        return sb.toString();
+    }
 }

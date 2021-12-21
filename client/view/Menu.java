@@ -39,8 +39,7 @@ public class Menu {
                             userInput = Utility.readString(1);
                             switch (userInput) {
                                 case "1":
-                                    System.out.println("Show Online Users");
-                                    break;
+                                    userClient.onlineUsersList();
                                 case "2":
                                     System.out.println("Group Message");
                                     break;

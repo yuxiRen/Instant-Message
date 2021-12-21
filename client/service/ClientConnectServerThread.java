@@ -18,7 +18,7 @@ public class ClientConnectServerThread extends Thread {
             try {
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) ois.readObject();
-                if (message.getType().equals(MessageType.RETURN_ONLINE_FRIENDS)) {
+                if (message.getType().equals(MessageType.RETURN_ONLINE_USERS)) {
                     String[] onlineUsers = message.getContent().split(" ");
                     System.out.println("============Online Users==============");
                     for (int i = 0; i < onlineUsers.length; i++) {
