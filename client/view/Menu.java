@@ -43,14 +43,16 @@ public class Menu {
                                 case "1":
                                     userClient.onlineUsersList();
                                 case "2":
-                                    System.out.println("Group Message");
+                                    System.out.println("Type your message here:");
+                                    String GroupContent = Utility.readString(100);
+                                    communication.sendToAll(GroupContent, id);
                                     break;
                                 case "3":
                                     System.out.println("Who do you want to talk to?");
                                     String receiverId = Utility.readString(50);
                                     System.out.println("Type your message here: ");
-                                    String content = Utility.readString(100);
-                                    communication.sendContent(content, id, receiverId);
+                                    String privateContent = Utility.readString(100);
+                                    communication.sendContent(privateContent, id, receiverId);
                                     break;
                                 case "4":
                                     System.out.println("Send File");

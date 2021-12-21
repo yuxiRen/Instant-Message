@@ -23,4 +23,20 @@ public class Communication {
             e.printStackTrace();
         }
     }
+
+    public void sendToAll(String content, String senderId) {
+        Message message = new Message();
+        message.setType(MessageType.GROUP_MESSAGE);
+        message.setContent(content);
+        message.setSender(senderId);
+        message.setSendTime(new Date().toString());
+        System.out.println(senderId + " says: ");
+        try {
+            ClientConnectServerThread thread = ManageClientConnectServerThread.getThread(senderId);
+            ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
+            oos.writeObject(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

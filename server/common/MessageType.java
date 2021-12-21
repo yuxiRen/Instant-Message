@@ -7,4 +7,5 @@ public interface MessageType {
     String GET_ONLINE_USERS = "4";
     String RETURN_ONLINE_USERS = "5";
     String CLIENT_EXIT = "6";
+    String GROUP_MESSAGE = "7";
 }
