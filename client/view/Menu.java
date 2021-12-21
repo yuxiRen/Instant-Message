@@ -1,12 +1,14 @@
 package view;
 
 import service.ClientService;
+import service.Communication;
 import util.Utility;
 
 public class Menu {
     private boolean loop = true;
     private String userInput = "";
     private ClientService userClient = new ClientService();
+    private Communication communication = new Communication();
 
     public static void main(String[] args) {
         new Menu().menu();
@@ -44,7 +46,11 @@ public class Menu {
                                     System.out.println("Group Message");
                                     break;
                                 case "3":
-                                    System.out.println("Private message");
+                                    System.out.println("Who do you want to talk to?");
+                                    String receiverId = Utility.readString(50);
+                                    System.out.println("Type your message here: ");
+                                    String content = Utility.readString(100);
+                                    communication.sendContent(content, id, receiverId);
                                     break;
                                 case "4":
                                     System.out.println("Send File");
