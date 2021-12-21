@@ -48,11 +48,29 @@ public class ClientService {
     public void onlineUsersList() {
         Message message = new Message();
         message.setType(MessageType.GET_ONLINE_USERS);
+        message.setSender(user.getUserId());
         try {
             ClientConnectServerThread thread =
                     ManageClientConnectServerThread.getThread(user.getUserId());
             ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
             oos.writeObject(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // exit Client side, and send Server a exit message
+    public void logout() {
+        Message message = new Message();
+        message.setType(MessageType.CLIENT_EXIT);
+        message.setSender(user.getUserId());
+        try {
+            ClientConnectServerThread thread =
+                    ManageClientConnectServerThread.getThread(user.getUserId());
+            ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
+            oos.writeObject(message);
+            System.out.println(user.getUserId() + " logout");
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

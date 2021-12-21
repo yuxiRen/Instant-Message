@@ -20,7 +20,7 @@ public class ClientConnectServerThread extends Thread {
                 Message message = (Message) ois.readObject();
                 if (message.getType().equals(MessageType.RETURN_ONLINE_USERS)) {
                     String[] onlineUsers = message.getContent().split(" ");
-                    System.out.println("============Online Users==============");
+                    System.out.println("\n============Online Users==============");
                     for (int i = 0; i < onlineUsers.length; i++) {
                         System.out.println("User: " + onlineUsers[i]);
                     }

@@ -50,6 +50,7 @@ public class Menu {
                                     System.out.println("Send File");
                                     break;
                                 case "9":
+                                    userClient.logout();
                                     loop = false;
                                     break;
                             }
