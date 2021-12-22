@@ -1,7 +1,7 @@
 package service;
 
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import common.Message;
 import common.MessageType;
@@ -30,11 +30,12 @@ public class ClientConnectServerThread extends Thread {
                     System.out.println("\n" + message.getSendTime() + "\t" + message.getSender()
                             + " says: " + message.getContent());
                 } else if (message.getType().equals(MessageType.FILE_MESSAGE)) {
-                    ServerConnectClientThread thread =
-                            ManageClientConnectServerThread.getThread(message.getReceiver());
-                    ObjectOutputStream oos =
-                            new ObjectOutputStream(thread.getSocket().getOutputStream());
-                    oos.writeObject(message);
+                    System.out.println("\n" + message.getSender() + " sends "
+                            + message.getFileSource() + " to you.");
+                    FileOutputStream fos = new FileOutputStream(message.getFileDestination(), true);
+                    fos.write(message.getFileBytes());
+                    fos.close();
+                    System.out.println("File in " + message.getFileDestination());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

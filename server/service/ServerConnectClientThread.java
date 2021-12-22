@@ -61,6 +61,12 @@ public class ServerConnectClientThread extends Thread {
                             oos.writeObject(message);
                         }
                     }
+                } else if (message.getType().equals(MessageType.FILE_MESSAGE)) {
+                    ServerConnectClientThread thread =
+                            ManageServerConnectClientThread.getThread(message.getReceiver());
+                    ObjectOutputStream oos =
+                            new ObjectOutputStream(thread.getSocket().getOutputStream());
+                    oos.writeObject(message);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

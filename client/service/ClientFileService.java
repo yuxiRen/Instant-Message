@@ -16,11 +16,11 @@ public class ClientFileService {
         message.setFileSource(source);
         message.setFileDestination(destination);
         FileInputStream fileInputStream = null;
+        byte[] fileBytes = new byte[(int) new File(source).length()];
         try {
-            byte[] fileBytes = new byte[(int) new File(source).length()];
             fileInputStream = new FileInputStream(source);
-            fileInputStream.read(fileBytes);
             message.setFileBytes(fileBytes);
+            fileInputStream.read(fileBytes);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -36,6 +36,7 @@ public class ClientFileService {
         ClientConnectServerThread thread = ManageClientConnectServerThread.getThread(senderId);
         try {
             ObjectOutputStream oos = new ObjectOutputStream(thread.getSocket().getOutputStream());
+            oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
         }

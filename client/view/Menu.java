@@ -1,5 +1,6 @@
 package view;
 
+import service.ClientFileService;
 import service.ClientService;
 import service.Communication;
 import util.Utility;
@@ -7,8 +8,10 @@ import util.Utility;
 public class Menu {
     private boolean loop = true;
     private String userInput = "";
+    String receiverId = "";
     private ClientService userClient = new ClientService();
     private Communication communication = new Communication();
+    private ClientFileService fileService = new ClientFileService();
 
     public static void main(String[] args) {
         new Menu().menu();
@@ -49,13 +52,20 @@ public class Menu {
                                     break;
                                 case "3":
                                     System.out.println("Who do you want to talk to?");
-                                    String receiverId = Utility.readString(50);
+                                    receiverId = Utility.readString(50);
                                     System.out.println("Type your message here: ");
                                     String privateContent = Utility.readString(100);
                                     communication.sendContent(privateContent, id, receiverId);
                                     break;
                                 case "4":
-                                    System.out.println("Send File");
+                                    System.out.print("Send File to Whom?");
+                                    receiverId = Utility.readString(50);
+                                    System.out.print("Type the file's path");
+                                    String source = Utility.readString(150);
+                                    System.out.print("Type the file's path in " + receiverId
+                                            + "'s computer");
+                                    String destination = Utility.readString(150);
+                                    fileService.sendFile(source, destination, id, receiverId);
                                     break;
                                 case "9":
                                     userClient.logout();
