@@ -1,6 +1,7 @@
 package service;
 
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import common.Message;
 import common.MessageType;
@@ -28,6 +29,12 @@ public class ClientConnectServerThread extends Thread {
                         || message.getType().equals(MessageType.GROUP_MESSAGE)) {
                     System.out.println("\n" + message.getSendTime() + "\t" + message.getSender()
                             + " says: " + message.getContent());
+                } else if (message.getType().equals(MessageType.FILE_MESSAGE)) {
+                    ServerConnectClientThread thread =
+                            ManageClientConnectServerThread.getThread(message.getReceiver());
+                    ObjectOutputStream oos =
+                            new ObjectOutputStream(thread.getSocket().getOutputStream());
+                    oos.writeObject(message);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
