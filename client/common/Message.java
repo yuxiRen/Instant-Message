@@ -9,17 +9,17 @@ public class Message implements Serializable {
     private String content;
     private String sendTime;
     private String type;
-    private byte[] fileArrays;
+    private byte[] fileBytes;
     private int fileLength = 0;
     private String fileDestination;
     private String fileSource;
 
-    public byte[] getFileArrays() {
-        return fileArrays;
+    public byte[] getFileBytes() {
+        return fileBytes;
     }
 
-    public void setFileArrays(byte[] fileArrays) {
-        this.fileArrays = fileArrays;
+    public void setFileBytes(byte[] fileBytes) {
+        this.fileBytes = fileBytes;
     }
 
     public int getFileLength() {
